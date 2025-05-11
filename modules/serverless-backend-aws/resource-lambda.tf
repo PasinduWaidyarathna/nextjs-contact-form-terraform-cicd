@@ -5,8 +5,8 @@ resource "aws_lambda_function" "serverless_contact_form_lambda" {
   s3_bucket = "pasindumw-nextjs-contact-form"
   s3_key    = "lambda.zip"
 
-  handler = "index.handler"
-  runtime = "nodejs18.x"
+  handler = "lambda/index.handler"
+  runtime = "nodejs20.x"
 
   role = aws_iam_role.lambda_exec.arn
 }

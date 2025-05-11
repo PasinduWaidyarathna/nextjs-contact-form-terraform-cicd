@@ -10,5 +10,5 @@ module "cors" {
   api_resource_id = module.serverless-backend-aws.api_gateway_contact_form.root_resource_id
   allow_headers = ["Content-Type"]
   allow_methods = ["OPTIONS", "POST"]
-  allow_origin = "http://localhost:3000" 
+  allow_origin = "*" 
 }
