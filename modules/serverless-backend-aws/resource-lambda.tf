@@ -2,7 +2,7 @@ resource "aws_lambda_function" "serverless_contact_form_lambda" {
   function_name = "ServerlessContactForm"
 
   # change the name of the S3 bucket to the one you have 
-  s3_bucket = "pasindumw-nextjs-contact-form"
+  s3_bucket = "pasindumw-nextjs-contact-form" //S3 bucket name
   s3_key    = "lambda.zip"
 
   handler = "lambda/index.handler"

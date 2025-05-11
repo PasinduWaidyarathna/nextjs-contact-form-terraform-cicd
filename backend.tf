@@ -8,7 +8,7 @@ terraform {
       }
   }
   backend "s3" {
-    bucket         = "pasindumw-terraform-gh"
+    bucket         = "pasindumw-terraform-gh" // S3 bucket name for storing the state file
     region         = "eu-north-1"
     key            = "nextjs-contact-form/terraform.tfstate"
     encrypt = true
