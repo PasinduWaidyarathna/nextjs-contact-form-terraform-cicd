@@ -28,6 +28,7 @@ resource "aws_api_gateway_method" "proxy_root" {
 #   rest_api_id = aws_api_gateway_rest_api.serverless_contact_form_api.id
 #   stage_name  = "dev"
 # }
+
 resource "aws_api_gateway_deployment" "dev" {
   depends_on = [aws_api_gateway_integration.lambda]
 

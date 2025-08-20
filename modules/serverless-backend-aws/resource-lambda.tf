@@ -9,6 +9,15 @@ resource "aws_lambda_function" "serverless_contact_form_lambda" {
   runtime = "nodejs20.x"
 
   role = aws_iam_role.lambda_exec.arn
+
+  environment {
+    variables = {
+      FROM_EMAIL  = "kvpasindumalinda@gmail.com"
+      TO_EMAIL    = "kvpasindumalinda@gmail.com"
+      SES_REGION  = "eu-north-1"
+      CORS_ORIGIN = "*"
+    }
+  }
 }
 
 # resource "aws_iam_role" "lambda_exec" {
@@ -49,6 +58,7 @@ resource "aws_lambda_function" "serverless_contact_form_lambda" {
 # EOF
 #   }
 # }
+
 resource "aws_iam_role" "lambda_exec" {
   name = "serverless_contact_form"
 
