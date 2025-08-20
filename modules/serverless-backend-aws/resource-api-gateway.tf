@@ -22,9 +22,21 @@ resource "aws_api_gateway_method" "proxy_root" {
 }
 
 
+# resource "aws_api_gateway_deployment" "dev" {
+#   depends_on = [aws_api_gateway_integration.lambda]
+
+#   rest_api_id = aws_api_gateway_rest_api.serverless_contact_form_api.id
+#   stage_name  = "dev"
+# }
 resource "aws_api_gateway_deployment" "dev" {
   depends_on = [aws_api_gateway_integration.lambda]
 
   rest_api_id = aws_api_gateway_rest_api.serverless_contact_form_api.id
-  stage_name  = "dev"
 }
+
+resource "aws_api_gateway_stage" "dev" {
+  rest_api_id   = aws_api_gateway_rest_api.serverless_contact_form_api.id
+  deployment_id = aws_api_gateway_deployment.dev.id
+  stage_name    = "dev"
+}
+

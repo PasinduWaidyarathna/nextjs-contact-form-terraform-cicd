@@ -11,6 +11,44 @@ resource "aws_lambda_function" "serverless_contact_form_lambda" {
   role = aws_iam_role.lambda_exec.arn
 }
 
+# resource "aws_iam_role" "lambda_exec" {
+#   name = "serverless_contact_form"
+
+#   assume_role_policy = <<EOF
+# {
+#   "Version": "2012-10-17",
+#   "Statement": [
+#     {
+#       "Action": "sts:AssumeRole",
+#       "Principal": {
+#         "Service": "lambda.amazonaws.com"
+#       },
+#       "Effect": "Allow",
+#       "Sid": ""
+#     }
+#   ]
+# }
+# EOF
+# # inline policy in order to access SES
+#  inline_policy {
+#     name = "SESPermissionsPolicy"
+#     policy = <<EOF
+# {
+#   "Version": "2012-10-17",
+#   "Statement": [
+#     {
+#       "Effect": "Allow",
+#       "Action": [
+#         "ses:SendEmail",
+#         "ses:SendRawEmail"
+#       ],
+#       "Resource": "*"
+#     }
+#   ]
+# }
+# EOF
+#   }
+# }
 resource "aws_iam_role" "lambda_exec" {
   name = "serverless_contact_form"
 
@@ -29,10 +67,12 @@ resource "aws_iam_role" "lambda_exec" {
   ]
 }
 EOF
-# inline policy in order to access SES
- inline_policy {
-    name = "SESPermissionsPolicy"
-    policy = <<EOF
+}
+
+resource "aws_iam_role_policy" "lambda_ses_policy" {
+  name = "SESPermissionsPolicy"
+  role = aws_iam_role.lambda_exec.id
+  policy = <<EOF
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -47,8 +87,8 @@ EOF
   ]
 }
 EOF
-  }
 }
+
 
 
 resource "aws_lambda_permission" "apigw" {
